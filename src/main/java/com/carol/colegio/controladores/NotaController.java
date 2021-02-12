@@ -33,7 +33,7 @@ public class NotaController {
 			@RequestParam(value = "nombre", required = false) String nombre,
 			@RequestParam(value = "asignatura") String asignatura,
 			@RequestParam(value = "nota", required = false) Double nota,
-			@RequestParam(value = "fehca", required = false) String fecha,
+			@RequestParam(value = "fecha", required = false) String fecha,
 			ModelMap model){		
 		
 		model.addAttribute("lista", notaImpl.obtenerNotaPorIdNombreAsignaturaNotaFecha(idAlumno, nombre, asignatura, nota, fecha));
@@ -66,5 +66,42 @@ public class NotaController {
 		
 		return "vistas/notas/insertarNotas";
 		
+	}
+	
+	//Actualizar alumnos
+	@GetMapping(value = "formularioactualizarnota")
+	public String FormularioActualizarNotas() {			
+		return "vistas/notas/actualizarNotas";
+	}
+		
+	@PostMapping(value = "formularioactualizarnota")
+	public String BuscarFormularioActualizarNotas(
+			@RequestParam(value = "nombre", required = false) String nombre,
+			@RequestParam(value = "asignatura") String asignatura,
+			@RequestParam(value = "fecha", required = false) String fecha,
+			ModelMap model) {
+			
+		model.addAttribute("lista", notaImpl.obtenerNotaPorNombreAsignaturaFecha(nombre, nombre, nombre));
+		model.addAttribute("listaAlumnos", combo.comboAlumnos());
+		model.addAttribute("listaAsignaturas", combo.comboAsignaturas());
+		
+		return "vistas/notas/actualizarNotas";
+	}
+		
+	@PostMapping(value = "actualizarnota")
+	public String ActualizarNotas(
+			@RequestParam(value = "idNota") Integer idNota,
+			@RequestParam(value = "alumnos") Integer idAlumno, 
+			@RequestParam(value = "asignaturas") Integer idAsignatura,
+			@RequestParam(value = "nota",  required = false) Double curso,
+			@RequestParam(value = "fecha", required = false) String tasa,
+			ModelMap model) {		
+			
+		model.addAttribute("listaAlumnos", combo.comboAlumnos());
+		model.addAttribute("listaAsignaturas", combo.comboAsignaturas());
+			
+		model.addAttribute("resultado", notaImpl.actualizarNota(idNota, idAlumno, idAsignatura, curso, tasa));
+		
+		return "vistas/notas/actualizarNotas";
 	}
 }

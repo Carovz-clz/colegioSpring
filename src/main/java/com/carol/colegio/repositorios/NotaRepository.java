@@ -26,4 +26,15 @@ public interface NotaRepository extends CrudRepository<NotaEntity, Integer>{
 					  @Param("asignatura") String asignatura,
 					  @Param("nota") Double nota,
 					  @Param("fecha") String fecha);
+	
+	@Query(value = "select new com.carol.colegio.dtos.NotaDTO (n.id, a.id, a.nombre, asig.id, asig.nombre, n.nota, n.fecha) "
+			+ "FROM com.carol.colegio.entities.NotaEntity n JOIN com.carol.colegio.entities.AlumnoEntity a ON n.alumnos.id = a.id "
+			+ "JOIN com.carol.colegio.entities.AsignaturaEntity asig ON n.asignaturas.id = asig.id "
+			+ "AND a.nombre LIKE CONCAT ('%',:nombre,'%') "
+			+ "AND asig.nombre LIKE CONCAT ('%',:asignatura,'%') "
+			+ "AND n.fecha LIKE CONCAT ('%',:fecha,'%') or :fecha is null")
+			  List<NotaDTO> obtenerNotaPorNombreAsignaturaFecha(
+					  @Param("nombre") String nombre,
+					  @Param("asignatura") String asignatura,
+					  @Param("fecha") String fecha);
 }

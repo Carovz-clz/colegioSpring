@@ -38,8 +38,8 @@ public class NotaDAOImpl implements NotaDAO {
 
 	@Override
 	public List<NotaDTO> obtenerNotaPorNombreAsignaturaFecha(String nombre, String asignatura, String fecha) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return notaRepository.obtenerNotaPorNombreAsignaturaFecha(nombre, asignatura, fecha);
 	}
 
 	@Override
@@ -62,9 +62,18 @@ public class NotaDAOImpl implements NotaDAO {
 	}
 
 	@Override
-	public Integer actualizarNota(String idNota, String idAlumno, String idAsignatura, String nota, String fecha) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer actualizarNota(Integer idNota, Integer idAlumno, Integer idAsignatura, Double nota, String fecha) {
+		
+		Optional<AlumnoEntity> a = alumnoRepository.findById(idAlumno);
+		AlumnoEntity alumno = a.get();
+		
+		Optional<AsignaturaEntity> asig = asignaturaRepository.findById(idAsignatura);
+		AsignaturaEntity asignatura = asig.get();
+		
+		NotaEntity n = new NotaEntity(idNota, alumno, asignatura, nota, fecha);
+		notaRepository.save(n);
+		
+		return 1;
 	}
 
 	@Override
