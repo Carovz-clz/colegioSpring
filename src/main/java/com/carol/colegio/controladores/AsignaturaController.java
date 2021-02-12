@@ -22,7 +22,7 @@ public class AsignaturaController {
 	}
 	
 	@PostMapping(value = "listadoasignaturas")
-	public String listarAlumnos(
+	public String listarAsignaturaPorIdNombreCursoTasa(
 			@RequestParam(value = "id", required = false) Integer id , 
 			@RequestParam(value = "nombre") String nombre, 
 			@RequestParam(value = "curso", required = false) Integer curso,
