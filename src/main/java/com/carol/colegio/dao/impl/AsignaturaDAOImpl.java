@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.carol.colegio.dao.AsignaturaDAO;
 import com.carol.colegio.dtos.AsignaturaDTO;
-import com.carol.colegio.entities.AlumnoEntity;
 import com.carol.colegio.entities.AsignaturaEntity;
 import com.carol.colegio.repositorios.AsignaturaRepository;
 
@@ -34,9 +33,12 @@ public class AsignaturaDAOImpl implements AsignaturaDAO {
 	}
 
 	@Override
-	public Integer actualizarAsignatura(String idOld, String idNew, String nombre, String curso, String tasa) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer actualizarAsignatura(Integer id, String nombre, Integer curso, Double tasa) {
+		
+		AsignaturaEntity asignatura = new AsignaturaEntity(id, nombre, curso, tasa);	
+		asignaturaRepository.save(asignatura);
+		
+		return 1;
 	}
 
 	@Override
