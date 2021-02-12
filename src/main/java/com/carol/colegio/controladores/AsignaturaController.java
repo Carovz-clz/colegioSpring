@@ -16,6 +16,7 @@ public class AsignaturaController {
 	@Autowired
 	private AsignaturaDAO asignatura;
 	
+	//Listado asignaturas
 	@GetMapping(value = "listadoasignaturas")
 	public String listarAsignaturas() {
 		return "vistas/asignaturas/listadoAsignaturas";
@@ -31,6 +32,27 @@ public class AsignaturaController {
 		
 		
 		model.addAttribute("lista", asignatura.obtenerAsignaturaPorIdNombreCursoTasa(id, nombre, curso, tasa));
-		return "vistas/alumnos/listadoAlumnos";
+		return "vistas/asignaturas/listadoAsignaturas";
+	}
+	
+	//Insertar asignaturas
+	@GetMapping(value = "insertarasignatura")
+	public String insertarAsignatura() {
+		return "vistas/asignaturas/insertarAsignaturas";
+	}
+	
+	@PostMapping(value = "insertarasignatura")
+	public String insertarAsignatura(
+			@RequestParam(value = "id", required = false) Integer id, 
+			@RequestParam(value = "nombre") String nombre,
+			@RequestParam(value = "curso",  required = false) Integer curso,
+			@RequestParam(value = "tasa", required = false) Double tasa, 
+			ModelMap model){
+		
+		
+		model.addAttribute("resultado", asignatura.insertarAsignatura(id, nombre, curso, tasa));
+		
+		return "vistas/asignaturas/insertarAsignaturas";	
+		
 	}
 }
