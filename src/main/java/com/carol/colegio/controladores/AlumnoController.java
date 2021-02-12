@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.carol.colegio.dao.AlumnoDAO;
 import com.carol.colegio.dao.ComboDAO;
-import com.carol.colegio.entities.AlumnoEntity;
-import com.carol.colegio.repositorios.AlumnoRepository;
 
 @Controller
 public class AlumnoController {
@@ -117,8 +115,7 @@ public class AlumnoController {
 			@RequestParam(value = "nombre") String nombre,
 			@RequestParam(value = "municipios") Integer idMunicipio,
 			@RequestParam(value = "familiaNumerosa", required = false) Integer famNumerosa,
-			ModelMap modelMap) {
-		
+			ModelMap modelMap) {		
 		
 		modelMap.addAttribute("listaMunicipios", combo.comboMunicipios());		
 		modelMap.addAttribute("resultado", alumnoImpl.actualizaralumno(id, nombre, idMunicipio, famNumerosa));		
