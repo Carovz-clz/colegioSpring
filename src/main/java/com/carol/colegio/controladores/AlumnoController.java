@@ -51,6 +51,21 @@ public class AlumnoController {
 		
 	}
 	
+	//Listado alumnos
+	@GetMapping(value = "listadoalumnos")
+	public String FormularioListadoAlumnos(ModelMap model) {
+		return "vistas/alumnos/listadoAlumnos";
+	}
 	
+	
+	@PostMapping(value = "listadoalumnos")
+	public String listarAlumnos(@RequestParam(value = "id", required = false) Integer id , 
+			@RequestParam("nombre") String nombre, 
+			ModelMap model) {
+		
+		
+		model.addAttribute("lista", alumnoRepository.buscaAlumnoporIDyNombre(id, nombre));
+		return "vistas/alumnos/listadoAlumnos";
+	}
 	
 }
