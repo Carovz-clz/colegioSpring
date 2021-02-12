@@ -10,6 +10,6 @@ public interface AlumnoDAO {
 	Integer insertarAlumno(Integer id, String nombre, Integer idMunicipio, Integer famNumerosa);
 	Integer actualizaralumno(String idOld, String idNew, String nombre, String idMunicipio);
 	Integer actualizaralumno(String idOld, String idNew, String nombre, String idMunicipio, String famNumerosa);
-	Integer eliminarAlumno(String id);
+	Integer eliminarAlumno(Integer id);
 	boolean esFamiliaNumerosa(String idAlumno);
 }

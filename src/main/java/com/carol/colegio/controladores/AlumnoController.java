@@ -35,7 +35,8 @@ public class AlumnoController {
 	}
 	
 	@PostMapping(value = "insertaralumno")
-	public String InsertarAlumno(@RequestParam(value = "id", required = false) Integer id, 
+	public String InsertarAlumno(
+			@RequestParam(value = "id", required = false) Integer id, 
 			@RequestParam(value = "nombre") String nombre, @RequestParam(value = "municipios") Integer idMunicipio,
 			@RequestParam(value = "familiaNumerosa", required = false) Integer familiaNumerosa, 
 			ModelMap model){
@@ -56,13 +57,44 @@ public class AlumnoController {
 	
 	
 	@PostMapping(value = "listadoalumnos")
-	public String listarAlumnos(@RequestParam(value = "id", required = false) Integer id , 
+	public String listarAlumnos(
+			@RequestParam(value = "id", required = false) Integer id , 
 			@RequestParam("nombre") String nombre, 
 			ModelMap model) {
 		
 		
 		model.addAttribute("lista", alumnoImpl.obtenerAlumnosporIdyNombre(id, nombre));
 		return "vistas/alumnos/listadoAlumnos";
+	}
+	
+	//Borrar alumnos
+	@GetMapping(value = "formularioeliminaralumno")
+	public String MostrarFormularioBorrarAlumnos() {
+		return "vistas/alumnos/eliminarAlumnos";
+	}
+	
+	@PostMapping(value = "formularioeliminaralumno")
+	public String FormularioBorrarAlumnos(
+			@RequestParam(value = "id", required = false) Integer id , 
+			@RequestParam("nombre") String nombre, 
+			ModelMap model) {
+		
+		model.addAttribute("lista", alumnoImpl.obtenerAlumnosporIdyNombre(id, nombre));
+		return "vistas/alumnos/eliminarAlumnos";
+	}
+	
+	@GetMapping(value = "eliminaralumno")
+	public String MostrarFormularioBorrarAlumno2s() {
+		return "vistas/alumnos/eliminarAlumnos";
+	}
+	
+	@PostMapping(value = "eliminaralumno")
+	public String BorrarAlumnos(
+			@RequestParam(value = "id") Integer id,
+			ModelMap modelMap) {
+		
+		modelMap.addAttribute("resultado", alumnoImpl.eliminarAlumno(id));
+		return "vistas/alumnos/eliminarAlumnos";
 	}
 	
 }

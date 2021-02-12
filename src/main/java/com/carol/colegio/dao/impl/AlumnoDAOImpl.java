@@ -44,9 +44,9 @@ public class AlumnoDAOImpl implements AlumnoDAO {
 	}
 
 	@Override
-	public Integer eliminarAlumno(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer eliminarAlumno(Integer id) {
+		alumnoRepository.deleteById(id);
+		return 1;
 	}
 
 	@Override
