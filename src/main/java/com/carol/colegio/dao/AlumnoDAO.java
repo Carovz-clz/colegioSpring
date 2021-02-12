@@ -6,10 +6,8 @@ import com.carol.colegio.dtos.AlumnoDTO;
 import com.carol.colegio.entities.AlumnoEntity;
 
 public interface AlumnoDAO {
-	List<AlumnoDTO> obtenerTodosAlumnos();
-	List<AlumnoDTO> obtenerAlumnosporIdyNombre(String nombre, String id);
-	Integer insertarAlumno(String id, String nombre, String idMunicipio);
-	Integer insertarAlumno(String id, String nombre, String idMunicipio, String famNumerosa);
+	List<AlumnoDTO> obtenerAlumnosporIdyNombre(Integer id, String nombre);
+	Integer insertarAlumno(Integer id, String nombre, Integer idMunicipio, Integer famNumerosa);
 	Integer actualizaralumno(String idOld, String idNew, String nombre, String idMunicipio);
 	Integer actualizaralumno(String idOld, String idNew, String nombre, String idMunicipio, String famNumerosa);
 	Integer eliminarAlumno(String id);

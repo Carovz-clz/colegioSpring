@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.carol.colegio.dao.AlumnoDAO;
 import com.carol.colegio.dao.ComboDAO;
 import com.carol.colegio.entities.AlumnoEntity;
 import com.carol.colegio.repositorios.AlumnoRepository;
@@ -22,7 +23,7 @@ public class AlumnoController {
 	private ComboDAO combo;
 	
 	@Autowired
-	private AlumnoRepository alumnoRepository;
+	private AlumnoDAO alumnoImpl;
 	
 	//private static final Logger logger = LoggerFactory.getILoggerFactory(AlumnoController.class);
 	
@@ -39,12 +40,8 @@ public class AlumnoController {
 			@RequestParam(value = "familiaNumerosa", required = false) Integer familiaNumerosa, 
 			ModelMap model){
 		
-		familiaNumerosa = (familiaNumerosa == null) ? 0 : 1;
 		
-		AlumnoEntity alumno = new AlumnoEntity(id, nombre, idMunicipio, familiaNumerosa);
-		
-		alumnoRepository.save(alumno);
-		
+		model.addAttribute("resultado", alumnoImpl.insertarAlumno(id, nombre, idMunicipio, familiaNumerosa));
 		model.addAttribute("listaMunicipios", combo.comboMunicipios());
 		
 		return "vistas/alumnos/insertarAlumnos";	
@@ -64,7 +61,7 @@ public class AlumnoController {
 			ModelMap model) {
 		
 		
-		model.addAttribute("lista", alumnoRepository.buscaAlumnoporIDyNombre(id, nombre));
+		model.addAttribute("lista", alumnoImpl.obtenerAlumnosporIdyNombre(id, nombre));
 		return "vistas/alumnos/listadoAlumnos";
 	}
 	
