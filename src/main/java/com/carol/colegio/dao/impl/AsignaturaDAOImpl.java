@@ -42,9 +42,9 @@ public class AsignaturaDAOImpl implements AsignaturaDAO {
 	}
 
 	@Override
-	public Integer eliminarAsignatura(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer eliminarAsignatura(Integer id) {
+		asignaturaRepository.deleteById(id);
+		return 1;
 	}
 
 	@Override

@@ -86,4 +86,31 @@ public class AsignaturaController {
 			
 		return "vistas/asignaturas/actualizarAsignaturas";
 	}
+	
+	//Borrar asignaturas
+	@GetMapping(value = "formularioborrarasignatura")
+	public String MostrarFormularioBorrarAsignaturas() {
+		return "vistas/asignaturas/borrarAsignaturas";
+	}
+		
+	@PostMapping(value = "formularioborrarasignatura")
+	public String FormularioBorrarAlumnos(
+			@RequestParam(value = "id", required = false) Integer id, 
+			@RequestParam(value = "nombre") String nombre,
+			@RequestParam(value = "curso",  required = false) Integer curso,
+			@RequestParam(value = "tasa", required = false) Double tasa, 
+			ModelMap model) {
+			
+		model.addAttribute("lista", asignatura.obtenerAsignaturaPorIdNombreCursoTasa(id, nombre, curso, tasa));
+		return "vistas/asignaturas/borrarAsignaturas";
+	}
+		
+	@PostMapping(value = "borrarasignatura")
+	public String BorrarAlumnos(
+			@RequestParam(value = "id") Integer id,
+			ModelMap modelMap) {
+			
+		modelMap.addAttribute("resultado", asignatura.eliminarAsignatura(id));
+		return "vistas/asignaturas/borrarAsignaturas";
+	}
 }
