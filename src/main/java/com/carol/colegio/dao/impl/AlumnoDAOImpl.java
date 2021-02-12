@@ -32,15 +32,13 @@ public class AlumnoDAOImpl implements AlumnoDAO {
 	}
 
 	@Override
-	public Integer actualizaralumno(String idOld, String idNew, String nombre, String idMunicipio) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer actualizaralumno(String idOld, String idNew, String nombre, String idMunicipio, String famNumerosa) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer actualizaralumno(Integer id, String nombre, Integer idMunicipio, Integer famNumerosa) {
+		famNumerosa = (famNumerosa == null) ? 0 : 1;
+		
+		AlumnoEntity alumno = new AlumnoEntity(id, nombre, idMunicipio, famNumerosa);	
+		alumnoRepository.save(alumno);
+		
+		return 1;
 	}
 
 	@Override
@@ -54,6 +52,8 @@ public class AlumnoDAOImpl implements AlumnoDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 
 

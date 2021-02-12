@@ -14,7 +14,7 @@
 </head>
 <body>
 	<h2>Modificación de alumnos</h2>
-	<%@include file="/menu.html"%>
+	<%@include file="../../menu.html"%>
 	
 	<div class="container">
 		<div class="form">
@@ -48,11 +48,11 @@
 					<label for="familiaNumerosa">Familia numerosa</label>
 									
 					<c:if test="${alumno.famNumerosa == 1}">
-						<input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" checked>
+						<input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" value="1" checked>
 					</c:if>
 					
 					<c:if test="${alumno.famNumerosa == 0}">
-						<input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" >
+						<input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" value="0">
 					</c:if>
 					<input type="submit" value="Modificar">
 				</form>
