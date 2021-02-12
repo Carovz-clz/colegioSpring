@@ -104,4 +104,30 @@ public class NotaController {
 		
 		return "vistas/notas/actualizarNotas";
 	}
+	
+	//Borrar notas
+	@GetMapping(value = "formularioborrarnota")
+	public String MostrarFormularioBorrarNotas() {
+		return "vistas/notas/borrarNotas";
+	}
+		
+	@PostMapping(value = "formularioborrarnota")
+	public String FormularioBorrarNotas(
+			@RequestParam(value = "nombre", required = false) String nombre,
+			@RequestParam(value = "asignatura") String asignatura,
+			@RequestParam(value = "fecha", required = false) String fecha,
+			ModelMap model) {
+			
+		model.addAttribute("lista", notaImpl.obtenerNotaPorNombreAsignaturaFecha(nombre, asignatura, fecha));
+		return "vistas/notas/borrarNotas";
+	}
+		
+		@PostMapping(value = "borrarnota")
+		public String BorrarNota(
+				@RequestParam(value = "idNota") Integer idNota,
+				ModelMap modelMap) {
+			
+			modelMap.addAttribute("resultado", notaImpl.eliminarNota(idNota));
+			return "vistas/notas/borrarNotas";
+		}
 }

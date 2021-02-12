@@ -77,9 +77,9 @@ public class NotaDAOImpl implements NotaDAO {
 	}
 
 	@Override
-	public Integer eliminarNota(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer eliminarNota(Integer id) {
+		notaRepository.deleteById(id);
+		return 1;
 	}
 
 }
